@@ -1,8 +1,9 @@
 Write-Output "Setting up Powershell..."
 
-Copy-Item $PSScriptRoot/profile.ps1 $profile.CurrentUserAllHosts
+$destDir = Split-Path -Parent $PROFILE
+$scriptName = $MyInvocation.MyCommand.Name
+write-output "Command name: $($MyInvocation.MyCommand.Name)"
 
-# todo: use exact path to avoid if statement
-if ($profile.CurrentUserCurrentHost.EndsWith("Microsoft.PowerShell_profile.ps1")) {
-  Copy-Item $PSScriptRoot/Microsoft.PowerShell_profile.ps1 $profile.CurrentUserCurrentHost
-}
+Get-ChildItem $PSScriptRoot | `
+  Where-Object { $_.NameString -ne $scriptName } | `
+  ForEach-Object { Write-Host "  Copying $($_.NameString)"; Copy-Item $_ $destDir }
