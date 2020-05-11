@@ -4,6 +4,9 @@ Write-Host "Loading profile.ps1"
 #Import-Module PowerTab
 Import-Module posh-git
 
+# & $PSScriptRoot/Set-Aliases.ps1
+. $PSScriptRoot/Set-GitAliases.ps1
+
 function c {
 	code
 }
