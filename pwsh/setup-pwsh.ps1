@@ -4,6 +4,6 @@ $destDir = Split-Path -Parent $PROFILE
 $scriptName = $MyInvocation.MyCommand.Name
 write-output "Command name: $($MyInvocation.MyCommand.Name)"
 
-Get-ChildItem $PSScriptRoot | `
+Get-ChildItem $PSScriptRoot -File | `
   Where-Object { $_.NameString -ne $scriptName } | `
   ForEach-Object { Write-Host "  Copying $($_.NameString)"; Copy-Item $_ $destDir }
