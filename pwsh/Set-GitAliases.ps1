@@ -4,6 +4,13 @@ Remove-Alias gcm -Force -ErrorAction SilentlyContinue
 Remove-Alias gl -Force -ErrorAction SilentlyContinue
 Remove-Alias gp -Force -ErrorAction SilentlyContinue
 
+$nothingToCommit = "nothing to commit"
+
+function anythingStaged {
+    $numberStaged = (git diff --cached --numstat | Measure-Object -Line).Lines
+    return $numberStaged -gt 0
+}
+
 function g { git @args }
 
 function ga { git add @args }
@@ -20,16 +27,29 @@ function gb { git branch $args }
 
 function gbd { git branch -d $args }
 
-function gcm { git commit @args }
+function gcm {
+    if (anythingStaged) {
+        git commit @args
+    }
+    else {
+        Write-Host $nothingToCommit
+        exit
+    }
+}
 
 function gcma { git commit --amend --no-edit }
 
 function gcmm([string]$message) {
+    if (-not (anythingStaged)) {
+        Write-Host $nothingToCommit
+        exit
+    }
+
     if ([string]::IsNullOrEmpty($message)) {
         $message = Read-Host -Prompt "Commit message"
     }
 
-    git commit -m $message
+    gcm -m $message
 }
 
 function gco { git checkout @args }
