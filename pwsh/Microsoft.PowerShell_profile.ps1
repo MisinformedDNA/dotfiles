@@ -7,7 +7,7 @@ function repos
     Set-Location C:\Repos
 }
 
-# Set-Alias r repos
+Set-Alias r repos
 
 function home {
 	Set-Location $env:userprofile
@@ -38,10 +38,6 @@ function gct { tg commit }
 
 function cdz() {
 	z $args
-}
-
-function r() {
-	z r $args
 }
 
 # Chocolatey profile
