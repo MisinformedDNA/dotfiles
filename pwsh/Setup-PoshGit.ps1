@@ -1,5 +1,3 @@
-Import-Module posh-git
-
 $GitPromptSettings.BeforeText = "["
 $GitPromptSettings.DefaultPromptEnableTiming = $false
 $GitPromptSettings.EnableWindowTitle = " "
