@@ -6,6 +6,7 @@ Import-Module posh-git
 
 # . $PSScriptRoot/Set-Aliases.ps1
 . (Join-Path $PSScriptRoot "Set-GitAliases.ps1")
+. (Join-Path $PSScriptRoot "Set-Shortcuts.ps1")
 
 function c {
 	code
