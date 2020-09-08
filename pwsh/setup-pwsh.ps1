@@ -1,7 +1,7 @@
 Write-Output "Setting up Powershell..."
 
-Install-Module posh-git
-Install-Module ZLocation  
+Install-Module posh-git -Force
+Install-Module ZLocation -Force
 
 $source = Join-Path $PSScriptRoot *
 $destDir = Split-Path -Parent $PROFILE
