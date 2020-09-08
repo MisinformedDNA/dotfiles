@@ -1,1 +1,0 @@
-pwsh ./setup.ps1
