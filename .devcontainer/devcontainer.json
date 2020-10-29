@@ -1,0 +1,7 @@
+{
+  "name": "dotfiles-devcontainer",
+  "extensions": [
+    "ms-vscode.powershell",
+  ],  
+  "postCreateCommand": "/bin/bash ./.devcontainer/post-install.sh"
+}
