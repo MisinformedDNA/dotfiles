@@ -1,0 +1,6 @@
+{
+  "settings": {
+    "terminal.integrated.shell.linux": "/opt/microsoft/powershell/7/pwsh"
+  }
+  "postCreateCommand": "./setup.ps1"
+}
