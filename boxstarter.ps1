@@ -4,6 +4,8 @@
 
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
+Install-WindowsUpdate -acceptEula
+
 # Source control
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
 choco upgrade tortoisegit
@@ -27,11 +29,16 @@ choco upgrade microsoft-windows-terminal
 # Switch to PowerShell Core
 refreshenv; pwsh
 
+Write-Host "Pwsh started"
 # Powershell Modules
 
+Write-Host "NuGet"
 Install-PackageProvider NuGet -Force
+Write-Host "AZ"
 Install-Module Az -AllowClobber -Scope CurrentUser -Force
+Write-Host "ZLocation"
 Install-Module ZLocation -Scope CurrentUser -Force; Import-Module ZLocation; Add-Content -Value "`r`n`r`nImport-Module ZLocation`r`n" -Encoding utf8 -Path $PROFILE.CurrentUserAllHosts
+Write-Host "posh-git"
 Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease; Add-PoshGitToProfile -AllHosts
 
 # CLIs
