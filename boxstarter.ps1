@@ -7,6 +7,8 @@
 choco feature enable -n=useRememberedArgumentsForUpgrades
 mkdir c:\temp
 choco config set cacheLocation c:\temp
+Write-Host $PROFILE
+Write-Host $PROFILE.CurrentUserAllHosts
 
 Install-WindowsUpdate -acceptEula
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
@@ -22,10 +24,10 @@ choco upgrade notepadplusplus
 choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
 # VS Code Extensions
-code --install-extension vscode-csharp
-code --install-extension vscode-powershell
-code --install-extension vscode-gitlens
-code --install-extension vscode-markdownlint
+code --install-extension ms-vscode.csharp
+code --install-extension ms-vscode.powershell
+code --install-extension eamodio.gitlens
+code --install-extension davidanson.vscode-markdownlint
 
 # Terminals
 choco upgrade powershell-core
@@ -50,7 +52,7 @@ Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease; Add-PoshGitT
 choco upgrade azure-cli
 choco upgrade nodejs-lts
 choco upgrade pulumi
-
+d
 # Tools
 choco upgrade azure-cosmosdb-emulator
 choco upgrade dotpeek
