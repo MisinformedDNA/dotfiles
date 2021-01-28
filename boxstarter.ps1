@@ -5,24 +5,24 @@
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
 # Source control
-choco install git --params "/NoShellIntegration /NoGitLfs"
-choco install tortoisegit
+choco upgrade git --params "/NoShellIntegration /NoGitLfs"
+choco upgrade tortoisegit
 
 # Editors
-choco install visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
+choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
 --add Microsoft.VisualStudio.Workload.VisualStudioExtension"
+choco upgrade notepadplusplus
+choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
-choco install notepadplusplus
-
-choco install vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
-choco install vscode-csharp
-choco install vscode-powershell
-choco install vscode-gitlens
-choco install vscode-markdownlint
+# VS Code Extensions
+choco upgrade vscode-csharp
+choco upgrade vscode-powershell
+choco upgrade vscode-gitlens
+choco upgrade vscode-markdownlint
 
 # Terminals
-choco install powershell-core
-choco install microsoft-windows-terminal
+choco upgrade powershell-core
+choco upgrade microsoft-windows-terminal
 
 # Switch to PowerShell Core
 refreshenv; pwsh
@@ -30,29 +30,29 @@ refreshenv; pwsh
 # Powershell Modules
 
 Install-PackageProvider NuGet -Force
-Install-Module Az -AllowClobber -Scope CurrentUser
+Install-Module Az -AllowClobber -Scope CurrentUser -Force
 Install-Module ZLocation -Scope CurrentUser -Force; Import-Module ZLocation; Add-Content -Value "`r`n`r`nImport-Module ZLocation`r`n" -Encoding utf8 -Path $PROFILE.CurrentUserAllHosts
 Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease; Add-PoshGitToProfile -AllHosts
 
 # CLIs
-choco install azure-cli
-choco install nodejs-lts
-choco install pulumi
+choco upgrade azure-cli
+choco upgrade nodejs-lts
+choco upgrade pulumi
 
 # Tools
-choco install azure-cosmosdb-emulator
-choco install dotpeek
-choco install fiddler
-choco install microsoftazurestorageexplorer
-choco install postman
-choco install sql-server-management-studio
-choco install sysinternals
-choco install winmerge
+choco upgrade azure-cosmosdb-emulator
+choco upgrade dotpeek
+choco upgrade fiddler
+choco upgrade microsoftazurestorageexplorer
+choco upgrade postman
+choco upgrade sql-server-management-studio
+choco upgrade sysinternals
+choco upgrade winmerge
 
 # Other
-choco install adobereader
-choco install microsoft-edge
-choco install onenote
-choco install powertoys
-choco install slack
-choco install spotify
+choco upgrade adobereader
+choco upgrade microsoft-edge
+choco upgrade onenote
+choco upgrade powertoys
+choco upgrade slack
+choco upgrade spotify
