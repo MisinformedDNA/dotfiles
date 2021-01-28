@@ -5,6 +5,8 @@
 # http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
 
 choco feature enable -n=useRememberedArgumentsForUpgrades
+mkdir c:\temp
+choco config set cacheLocation c:\temp
 
 Install-WindowsUpdate -acceptEula
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
@@ -20,10 +22,10 @@ choco upgrade notepadplusplus
 choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
 # VS Code Extensions
-choco upgrade vscode-csharp
-choco upgrade vscode-powershell
-choco upgrade vscode-gitlens
-choco upgrade vscode-markdownlint
+code --install-extension vscode-csharp
+code --install-extension vscode-powershell
+code --install-extension vscode-gitlens
+code --install-extension vscode-markdownlint
 
 # Terminals
 choco upgrade powershell-core
