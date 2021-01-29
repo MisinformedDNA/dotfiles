@@ -7,8 +7,6 @@
 choco feature enable -n=useRememberedArgumentsForUpgrades
 mkdir c:\temp
 choco config set cacheLocation c:\temp
-Write-Host $PROFILE
-Write-Host $PROFILE.CurrentUserAllHosts
 
 Install-WindowsUpdate -acceptEula
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
@@ -24,6 +22,7 @@ choco upgrade notepadplusplus
 choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
 # VS Code Extensions
+Write-Host "Install VS Code extensions"
 code --install-extension ms-vscode.csharp
 code --install-extension ms-vscode.powershell
 code --install-extension eamodio.gitlens
@@ -35,6 +34,18 @@ choco upgrade microsoft-windows-terminal
 
 # Switch to PowerShell Core
 #refreshenv; pwsh
+
+# Clone dotfiles
+Write-Host "Clone dotfiles"
+$reposPath = "/repos"
+New-Item $reposPath -ItemType Directory
+Set-Location $reposPath
+git clone https://github.com/MisinformedDNA/dotfiles/
+
+# Copy PowerShell profile files
+#$source = Join-Path $PSScriptRoot *
+$destDir = Split-Path -Parent $PROFILE
+Copy-Item $reposPath/pwsh $destDir -Recurse -ErrorAction SilentlyContinue
 
 Write-Host "Pwsh started"
 # Powershell Modules
