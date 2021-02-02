@@ -23,7 +23,7 @@ choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
 # VS Code Extensions
 Write-Host "Install VS Code extensions"
-code --install-extension ms-vscode.csharp
+code --install-extension ms-dotnettools.csharp
 code --install-extension ms-vscode.powershell
 code --install-extension eamodio.gitlens
 code --install-extension davidanson.vscode-markdownlint
@@ -63,7 +63,7 @@ Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease; Add-PoshGitT
 choco upgrade azure-cli
 choco upgrade nodejs-lts
 choco upgrade pulumi
-d
+
 # Tools
 choco upgrade azure-cosmosdb-emulator
 choco upgrade dotpeek
