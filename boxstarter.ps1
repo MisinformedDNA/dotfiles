@@ -23,16 +23,39 @@ choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.
 choco upgrade notepadplusplus
 choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
+# CLIs
+choco upgrade azure-cli
+choco upgrade nodejs-lts
+choco upgrade pulumi
+
+# Tools
+choco upgrade azure-cosmosdb-emulator
+choco upgrade dotpeek
+choco upgrade fiddler
+choco upgrade microsoftazurestorageexplorer
+choco upgrade postman
+choco upgrade sql-server-management-studio
+choco upgrade sysinternals
+choco upgrade winmerge
+
+# Other
+choco upgrade adobereader
+choco upgrade microsoft-edge
+choco upgrade onenote
+choco upgrade powertoys
+choco upgrade slack
+choco upgrade spotify
+
+# Terminals
+choco upgrade powershell-core
+choco upgrade microsoft-windows-terminal
+
 # VS Code Extensions
 Write-Host "Install VS Code extensions"
 code --install-extension ms-dotnettools.csharp
 code --install-extension ms-vscode.powershell
 code --install-extension eamodio.gitlens
 code --install-extension davidanson.vscode-markdownlint
-
-# Terminals
-choco upgrade powershell-core
-choco upgrade microsoft-windows-terminal
 
 # Switch to PowerShell Core
 #refreshenv; pwsh
@@ -60,29 +83,6 @@ Write-Host "ZLocation"
 Install-Module ZLocation -Scope CurrentUser -Force; Import-Module ZLocation; Add-Content -Value "`r`n`r`nImport-Module ZLocation`r`n" -Encoding utf8 -Path $PROFILE.CurrentUserAllHosts
 Write-Host "posh-git"
 Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease; Add-PoshGitToProfile -AllHosts
-
-# CLIs
-choco upgrade azure-cli
-choco upgrade nodejs-lts
-choco upgrade pulumi
-
-# Tools
-choco upgrade azure-cosmosdb-emulator
-choco upgrade dotpeek
-choco upgrade fiddler
-choco upgrade microsoftazurestorageexplorer
-choco upgrade postman
-choco upgrade sql-server-management-studio
-choco upgrade sysinternals
-choco upgrade winmerge
-
-# Other
-choco upgrade adobereader
-choco upgrade microsoft-edge
-choco upgrade onenote
-choco upgrade powertoys
-choco upgrade slack
-choco upgrade spotify
 
 # # Remove unwanted apps
 # # 3D Builder
