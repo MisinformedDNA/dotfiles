@@ -8,8 +8,10 @@ choco feature enable -n=useRememberedArgumentsForUpgrades
 mkdir c:\temp
 choco config set cacheLocation c:\temp
 
+# Windows
 Install-WindowsUpdate -acceptEula
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 # Source control
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
