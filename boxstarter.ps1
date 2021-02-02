@@ -41,6 +41,7 @@ choco upgrade winmerge
 # Other
 choco upgrade adobereader
 choco upgrade microsoft-edge
+choco install microsoft-teams
 choco upgrade onenote
 choco upgrade powertoys
 choco upgrade slack
