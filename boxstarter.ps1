@@ -1,10 +1,17 @@
-# Install Boxstarter:
-# . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
-# $creds = Get-Credential
-# Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1 -Credential $creds
-# http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
+<#Install Boxstarter:
 
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+. { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
+$creds = Get-Credential
+Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1 -Credential $creds
+#http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
+
+#> 
+
+Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+refreshenv
 choco feature enable -n=useRememberedArgumentsForUpgrades
+
 mkdir c:\temp
 choco config set cacheLocation c:\temp
 
