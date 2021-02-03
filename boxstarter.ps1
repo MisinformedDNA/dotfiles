@@ -9,7 +9,6 @@ Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/Misinfo
 #> 
 
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-refreshenv
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
 mkdir c:\temp
@@ -58,6 +57,8 @@ choco upgrade spotify
 choco upgrade powershell-core
 choco upgrade microsoft-windows-terminal
 
+refreshenv
+
 # VS Code Extensions
 Write-Host "Install VS Code extensions"
 code --install-extension ms-dotnettools.csharp
@@ -82,15 +83,17 @@ Copy-Item $reposPath/pwsh $destDir -Recurse -ErrorAction SilentlyContinue
 
 Write-Host "Pwsh started"
 # Powershell Modules
-Install-Module PowerShellGet -Force; Import-Module PowerShellGet
-Write-Host "NuGet"
+Write-Host "Install NuGet"
 Install-PackageProvider NuGet -Force
-Write-Host "AZ"
+Write-Host "Install PowerShellGet"
+Install-Module PowerShellGet -Force; Import-Module PowerShellGet
+Write-Host "Install Az"
 Install-Module Az -AllowClobber -Scope CurrentUser -Force
-Write-Host "ZLocation"
-Install-Module ZLocation -Scope CurrentUser -Force; Import-Module ZLocation; Add-Content -Value "`r`n`r`nImport-Module ZLocation`r`n" -Encoding utf8 -Path $PROFILE.CurrentUserAllHosts
-Write-Host "posh-git"
-Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease; Add-PoshGitToProfile -AllHosts
+Write-Host "Install ZLocation"
+Install-Module ZLocation -Scope CurrentUser -Force
+Write-Host "Install posh-git"
+powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
+
 
 # # Remove unwanted apps
 # # 3D Builder
