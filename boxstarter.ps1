@@ -18,89 +18,89 @@ mkdir c:\temp
 choco config set cacheLocation c:\temp
 
 # Windows
-Install-WindowsUpdate -acceptEula
-Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+# Install-WindowsUpdate -acceptEula
+# Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+# Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
-# Source control
-choco upgrade git --params "/NoShellIntegration /NoGitLfs"
-choco upgrade tortoisegit
+# # Source control
+# choco upgrade git --params "/NoShellIntegration /NoGitLfs"
+# choco upgrade tortoisegit
 
-# Editors
-choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
---add Microsoft.VisualStudio.Workload.VisualStudioExtension"
-choco upgrade notepadplusplus
-choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
+# # Editors
+# choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
+# --add Microsoft.VisualStudio.Workload.VisualStudioExtension"
+# choco upgrade notepadplusplus
+# choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
-# CLIs
-choco upgrade azure-cli
-choco upgrade nodejs-lts
-choco upgrade pulumi
+# # CLIs
+# choco upgrade azure-cli
+# choco upgrade nodejs-lts
+# choco upgrade pulumi
 
-# Tools
-choco upgrade azure-cosmosdb-emulator
-choco upgrade dotpeek
-choco upgrade fiddler
-choco upgrade microsoftazurestorageexplorer
-choco upgrade postman
-choco upgrade sql-server-management-studio
-choco upgrade sysinternals
-choco upgrade winmerge
+# # Tools
+# choco upgrade azure-cosmosdb-emulator
+# choco upgrade dotpeek
+# choco upgrade fiddler
+# choco upgrade microsoftazurestorageexplorer
+# choco upgrade postman
+# choco upgrade sql-server-management-studio
+# choco upgrade sysinternals
+# choco upgrade winmerge
 
-# Other
-choco upgrade adobereader
-choco upgrade microsoft-edge
-choco install microsoft-teams
-choco upgrade onenote
-choco upgrade powertoys
-choco upgrade slack
-choco upgrade spotify
+# # Other
+# choco upgrade adobereader
+# choco upgrade microsoft-edge
+# choco install microsoft-teams
+# choco upgrade onenote
+# choco upgrade powertoys
+# choco upgrade slack
+# choco upgrade spotify
 
-# Terminals
-choco upgrade powershell-core
-choco upgrade microsoft-windows-terminal
+# # Terminals
+# choco upgrade powershell-core
+# choco upgrade microsoft-windows-terminal
 
-refreshenv
+# refreshenv
 
-# VS Code Extensions
-Write-Host "Install VS Code extensions"
-code --install-extension ms-dotnettools.csharp
-code --install-extension ms-vscode.powershell
-code --install-extension eamodio.gitlens
-code --install-extension davidanson.vscode-markdownlint
+# # VS Code Extensions
+# Write-Host "Install VS Code extensions"
+# code --install-extension ms-dotnettools.csharp
+# code --install-extension ms-vscode.powershell
+# code --install-extension eamodio.gitlens
+# code --install-extension davidanson.vscode-markdownlint
 
-# Switch to PowerShell Core
-#refreshenv; pwsh
+# # Switch to PowerShell Core
+# #refreshenv; pwsh
 
-# Clone dotfiles
-Write-Host "Clone dotfiles"
-$reposPath = "/repos"
-$dotfilesPath = Join-Path $reposPath dotfiles
-New-Item $reposPath -ItemType Directory
-Set-Location $reposPath
-git clone https://github.com/MisinformedDNA/dotfiles/
+# # Clone dotfiles
+# Write-Host "Clone dotfiles"
+# $reposPath = "/repos"
+# $dotfilesPath = Join-Path $reposPath dotfiles
+# New-Item $reposPath -ItemType Directory
+# Set-Location $reposPath
+# git clone https://github.com/MisinformedDNA/dotfiles/
 
-Set-Location $dotfilesPath
-git checkout boxstarter
-git pull
+# Set-Location $dotfilesPath
+# git checkout boxstarter
+# git pull
 
-# Copy PowerShell profile files
-#$source = Join-Path $PSScriptRoot *
-$destDir = Split-Path -Parent $PROFILE
-Copy-Item $reposPath/pwsh $destDir -Recurse -ErrorAction SilentlyContinue
+# # Copy PowerShell profile files
+# #$source = Join-Path $PSScriptRoot *
+# $destDir = Split-Path -Parent $PROFILE
+# Copy-Item $reposPath/pwsh $destDir -Recurse -ErrorAction SilentlyContinue
 
-Write-Host "Pwsh started"
-# Powershell Modules
-Write-Host "Install NuGet"
-Install-PackageProvider NuGet -Force
-Write-Host "Install PowerShellGet"
-Install-Module PowerShellGet -Force; Import-Module PowerShellGet
-Write-Host "Install Az"
-Install-Module Az -AllowClobber -Scope CurrentUser -Force
-Write-Host "Install ZLocation"
-Install-Module ZLocation -Scope CurrentUser -Force
-Write-Host "Install posh-git"
-powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
+# Write-Host "Pwsh started"
+# # Powershell Modules
+# Write-Host "Install NuGet"
+# Install-PackageProvider NuGet -Force
+# Write-Host "Install PowerShellGet"
+# Install-Module PowerShellGet -Force; Import-Module PowerShellGet
+# Write-Host "Install Az"
+# Install-Module Az -AllowClobber -Scope CurrentUser -Force
+# Write-Host "Install ZLocation"
+# Install-Module ZLocation -Scope CurrentUser -Force
+# Write-Host "Install posh-git"
+# powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
 
 $pwshSetupPath = Join-Path $dotfilesPath "/scripts/setup-pwsh.ps1"
 pwsh -File $pwshSetupPath
@@ -228,8 +228,8 @@ pwsh -File $pwshSetupPath
 #DISABLE All BLOATWARE EXCEPT STORE
 # Get-AppxPackage -AllUsers | where-object {$_.name –notlike "*store*"} | Remove-AppxPackage
 
-#--- List all installed programs --#
-Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall* | sort -property DisplayName | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate |Format-Table -AutoSize
+# #--- List all installed programs --#
+# Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall* | sort -property DisplayName | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate |Format-Table -AutoSize
 
-#--- List all store-installed programs --#
-Get-AppxPackage | sort -property Name | Select-Object Name, PackageFullName, Version | Format-Table -AutoSize
+# #--- List all store-installed programs --#
+# Get-AppxPackage | sort -property Name | Select-Object Name, PackageFullName, Version | Format-Table -AutoSize
