@@ -72,9 +72,13 @@ code --install-extension davidanson.vscode-markdownlint
 # Clone dotfiles
 Write-Host "Clone dotfiles"
 $reposPath = "/repos"
+$dotfilesPath = Join-Path $reposPath $dotfilesPath
 New-Item $reposPath -ItemType Directory
 Set-Location $reposPath
 git clone https://github.com/MisinformedDNA/dotfiles/
+
+Set-Location $dotfilesPath
+git pull
 
 # Copy PowerShell profile files
 #$source = Join-Path $PSScriptRoot *
@@ -94,7 +98,8 @@ Install-Module ZLocation -Scope CurrentUser -Force
 Write-Host "Install posh-git"
 powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
 
-pwsh -File /repos/dotfiles/setup-pwsh.ps1
+$pwshSetupPath = Join-Path $dotfilesPath "/scripts/setup-pwsh.ps1"
+pwsh -File $pwshSetupPath
 
 
 # # Remove unwanted apps
