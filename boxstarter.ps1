@@ -81,6 +81,7 @@ Set-Location $reposPath
 git clone https://github.com/MisinformedDNA/dotfiles/
 
 Set-Location $dotfilesPath
+git checkout boxstarter
 git pull
 
 # Copy PowerShell profile files
