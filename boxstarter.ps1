@@ -94,6 +94,8 @@ Install-Module ZLocation -Scope CurrentUser -Force
 Write-Host "Install posh-git"
 powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
 
+pwsh -File /repos/dotfiles/setup-pwsh.ps1
+
 
 # # Remove unwanted apps
 # # 3D Builder
