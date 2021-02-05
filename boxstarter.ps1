@@ -8,6 +8,9 @@ Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/Misinfo
 
 #> 
 
+$VerbosePreference = 'Continue'
+Set-PSDebug -Trace 2
+
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
@@ -72,7 +75,7 @@ code --install-extension davidanson.vscode-markdownlint
 # Clone dotfiles
 Write-Host "Clone dotfiles"
 $reposPath = "/repos"
-$dotfilesPath = Join-Path $reposPath $dotfilesPath
+$dotfilesPath = Join-Path $reposPath dotfiles
 New-Item $reposPath -ItemType Directory
 Set-Location $reposPath
 git clone https://github.com/MisinformedDNA/dotfiles/
