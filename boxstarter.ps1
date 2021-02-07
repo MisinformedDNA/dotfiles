@@ -73,16 +73,16 @@ choco config set cacheLocation c:\temp
 # #refreshenv; pwsh
 
 # # Clone dotfiles
-# Write-Host "Clone dotfiles"
+Write-Host "Clone dotfiles"
 $reposPath = "/repos"
 $dotfilesPath = Join-Path $reposPath dotfiles
-# New-Item $reposPath -ItemType Directory
-# Set-Location $reposPath
-# git clone https://github.com/MisinformedDNA/dotfiles/
+New-Item $reposPath -ItemType Directory
+Set-Location $reposPath
+git clone https://github.com/MisinformedDNA/dotfiles/
 
-# Set-Location $dotfilesPath
-# git checkout boxstarter
-# git pull
+Set-Location $dotfilesPath
+git checkout boxstarter
+git pull
 
 # # Copy PowerShell profile files
 # #$source = Join-Path $PSScriptRoot *
