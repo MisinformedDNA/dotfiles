@@ -74,8 +74,8 @@ choco config set cacheLocation c:\temp
 
 # # Clone dotfiles
 # Write-Host "Clone dotfiles"
-# $reposPath = "/repos"
-# $dotfilesPath = Join-Path $reposPath dotfiles
+$reposPath = "/repos"
+$dotfilesPath = Join-Path $reposPath dotfiles
 # New-Item $reposPath -ItemType Directory
 # Set-Location $reposPath
 # git clone https://github.com/MisinformedDNA/dotfiles/
@@ -102,6 +102,7 @@ choco config set cacheLocation c:\temp
 # Write-Host "Install posh-git"
 # powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
 
+Write-Host "Calling powershell setup"
 $pwshSetupPath = Join-Path $dotfilesPath "/scripts/setup-pwsh.ps1"
 pwsh -File $pwshSetupPath
 
