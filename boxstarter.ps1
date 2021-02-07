@@ -14,7 +14,7 @@ Set-PSDebug -Trace 2
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
-mkdir c:\temp
+New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
 choco config set cacheLocation c:\temp
 
 # Windows
