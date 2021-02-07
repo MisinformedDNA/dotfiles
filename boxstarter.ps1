@@ -2,8 +2,7 @@
 
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
-$creds = Get-Credential
-Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1 -Credential $creds
+Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
 #http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
 
 #> 
@@ -18,56 +17,56 @@ New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
 choco config set cacheLocation c:\temp
 
 # Windows
-# Install-WindowsUpdate -acceptEula
-# Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
-# Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+Install-WindowsUpdate -acceptEula
+Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
-# # Source control
-# choco upgrade git --params "/NoShellIntegration /NoGitLfs"
-# choco upgrade tortoisegit
+# Source control
+choco upgrade git --params "/NoShellIntegration /NoGitLfs"
+choco upgrade tortoisegit
 
-# # Editors
-# choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
-# --add Microsoft.VisualStudio.Workload.VisualStudioExtension"
-# choco upgrade notepadplusplus
-# choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
+# Editors
+choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
+--add Microsoft.VisualStudio.Workload.VisualStudioExtension"
+choco upgrade notepadplusplus
+choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
-# # CLIs
-# choco upgrade azure-cli
-# choco upgrade nodejs-lts
-# choco upgrade pulumi
+# CLIs
+choco upgrade azure-cli
+choco upgrade nodejs-lts
+choco upgrade pulumi
 
-# # Tools
-# choco upgrade azure-cosmosdb-emulator
-# choco upgrade dotpeek
-# choco upgrade fiddler
-# choco upgrade microsoftazurestorageexplorer
-# choco upgrade postman
-# choco upgrade sql-server-management-studio
-# choco upgrade sysinternals
-# choco upgrade winmerge
+# Tools
+choco upgrade azure-cosmosdb-emulator
+choco upgrade dotpeek
+choco upgrade fiddler
+choco upgrade microsoftazurestorageexplorer
+choco upgrade postman
+choco upgrade sql-server-management-studio
+choco upgrade sysinternals
+choco upgrade winmerge
 
-# # Other
-# choco upgrade adobereader
-# choco upgrade microsoft-edge
-# choco install microsoft-teams
-# choco upgrade onenote
-# choco upgrade powertoys
-# choco upgrade slack
-# choco upgrade spotify
+# Other
+choco upgrade adobereader
+choco upgrade microsoft-edge
+choco install microsoft-teams
+choco upgrade onenote
+choco upgrade powertoys
+choco upgrade slack
+choco upgrade spotify
 
-# # Terminals
-# choco upgrade powershell-core
-# choco upgrade microsoft-windows-terminal
+# Terminals
+choco upgrade powershell-core
+choco upgrade microsoft-windows-terminal
 
-# refreshenv
+refreshenv
 
-# # VS Code Extensions
-# Write-Host "Install VS Code extensions"
-# code --install-extension ms-dotnettools.csharp
-# code --install-extension ms-vscode.powershell
-# code --install-extension eamodio.gitlens
-# code --install-extension davidanson.vscode-markdownlint
+# VS Code Extensions
+Write-Host "Install VS Code extensions"
+code --install-extension ms-dotnettools.csharp
+code --install-extension ms-vscode.powershell
+code --install-extension eamodio.gitlens
+code --install-extension davidanson.vscode-markdownlint
 
 # # Switch to PowerShell Core
 # #refreshenv; pwsh
@@ -84,23 +83,17 @@ Set-Location $dotfilesPath
 git checkout boxstarter
 git pull
 
-# # Copy PowerShell profile files
-# #$source = Join-Path $PSScriptRoot *
-# $destDir = Split-Path -Parent $PROFILE
-# Copy-Item $reposPath/pwsh $destDir -Recurse -ErrorAction SilentlyContinue
-
-# Write-Host "Pwsh started"
-# # Powershell Modules
-# Write-Host "Install NuGet"
-# Install-PackageProvider NuGet -Force
-# Write-Host "Install PowerShellGet"
-# Install-Module PowerShellGet -Force; Import-Module PowerShellGet
-# Write-Host "Install Az"
-# Install-Module Az -AllowClobber -Scope CurrentUser -Force
-# Write-Host "Install ZLocation"
-# Install-Module ZLocation -Scope CurrentUser -Force
-# Write-Host "Install posh-git"
-# powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
+# Powershell Modules
+Write-Host "Install NuGet"
+Install-PackageProvider NuGet -Force
+Write-Host "Install PowerShellGet"
+Install-Module PowerShellGet -Force; Import-Module PowerShellGet
+Write-Host "Install Az"
+Install-Module Az -AllowClobber -Scope CurrentUser -Force
+Write-Host "Install ZLocation"
+Install-Module ZLocation -Scope CurrentUser -Force
+Write-Host "Install posh-git"
+powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
 
 Write-Host "Calling powershell setup"
 $pwshSetupPath = Join-Path $dotfilesPath "/scripts/setup-pwsh.ps1"
