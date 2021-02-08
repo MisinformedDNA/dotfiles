@@ -99,6 +99,8 @@ Write-Host "Calling powershell setup"
 $pwshSetupPath = Join-Path $dotfilesPath "/scripts/setup-pwsh.ps1"
 pwsh -File $pwshSetupPath
 
+Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2076587 -OutFile azuredevops_inttooloffice2019_enu.exe
+azuredevops_inttooloffice2019_enu.exe /quiet
 
 # # Remove unwanted apps
 # # 3D Builder
