@@ -1,5 +1,6 @@
 Write-Output "Running setup..."
 
-./pwsh/setup-pwsh.ps1
+$command = Join-Path $PSScriptRoot scripts/setup-pwsh.ps1
+pwsh -File $command
 
 Write-Output "Setup completed."
