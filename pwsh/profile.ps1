@@ -2,7 +2,10 @@
 Write-Host "Loading profile.ps1"
 
 #Import-Module PowerTab
+Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 Import-Module posh-git
+Import-Module ZLocation
+
 
 # . $PSScriptRoot/Set-Aliases.ps1
 . (Join-Path $PSScriptRoot "Set-GitAliases.ps1")
@@ -40,5 +43,3 @@ function wb {
 function wp {
 	wyam -p -w
 }
-
-Import-Module ZLocation
