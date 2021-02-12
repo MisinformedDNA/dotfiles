@@ -16,7 +16,6 @@ choco config set cacheLocation c:\temp
 # Windows
 Install-WindowsUpdate -acceptEula
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
-powershell -File (Join-Path $PSScriptRoot scripts/FileExplorerSettings.ps1)
 
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
 refreshenv
@@ -33,7 +32,8 @@ Set-Location $dotfilesPath
 git checkout install-apps
 git pull
 
-. (Join-Path $dotfilesPath "/scripts/Install-Apps.ps1")
+. (Join-Path $dotfilesPath scripts/FileExplorerSettings.ps1)
+. (Join-Path $dotfilesPath scripts/Install-Apps.ps1)
 
 # VS Code Extensions
 Write-Host "Install VS Code extensions"
