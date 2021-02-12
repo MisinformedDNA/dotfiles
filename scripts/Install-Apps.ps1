@@ -43,4 +43,4 @@ choco upgrade powershell-core
 choco upgrade microsoft-windows-terminal
 
 Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2076587 -OutFile azuredevops_inttooloffice2019_enu.exe
-azuredevops_inttooloffice2019_enu.exe /quiet
+./azuredevops_inttooloffice2019_enu.exe /quiet
