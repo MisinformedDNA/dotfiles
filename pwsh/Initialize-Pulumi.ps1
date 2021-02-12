@@ -1,24 +1,26 @@
 [Environment]::SetEnvironmentVariable("PULUMI_SKIP_UPDATE_CHECK", $newpath, "User")
 
 function p {
-	pulumi @args
+    for ($i = 0; $i -lt $args.Count; $i++) {
+        if ($args[$i] -eq "sp") {
+            $args[$i] = "--skip-preview"
+        }
+    }
+
+    pulumi @args
 }
 
 function pd {
-	pulumi destroy @args
+	p destroy @args
 }
-function pl {
-	pulumi @args
-}
-
 function pp {
-	pulumi preview @args
+	p preview @args
 }
 
 function pr {
-	pulumi refresh @args
+	p refresh @args
 }
 
 function pu {
-	pulumi up @args
+	p up @args
 }
