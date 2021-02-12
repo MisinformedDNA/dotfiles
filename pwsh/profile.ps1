@@ -6,10 +6,12 @@ Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 Import-Module posh-git
 Import-Module ZLocation
 
+[System.Environment]::SetEnvironmentVariable("POWERSHELL_UPDATECHECK", "Off", "User")
 
 # . $PSScriptRoot/Set-Aliases.ps1
 . (Join-Path $PSScriptRoot "Set-GitAliases.ps1")
 . (Join-Path $PSScriptRoot "Set-Shortcuts.ps1")
+. (Join-Path $PSScriptRoot "Initialize-Pulumi.ps1")
 
 function c {
 	code

@@ -118,5 +118,3 @@ function fixauthorall {
 }
 
 Set-Alias faa fixauthorall
-
-git config advice.addEmptyPathspec false
