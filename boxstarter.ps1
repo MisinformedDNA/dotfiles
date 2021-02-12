@@ -15,7 +15,6 @@ choco config set cacheLocation c:\temp
 
 # Windows
 Install-WindowsUpdate -acceptEula
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
 refreshenv

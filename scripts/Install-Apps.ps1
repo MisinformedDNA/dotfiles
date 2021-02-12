@@ -4,6 +4,8 @@ choco feature enable -n=useRememberedArgumentsForUpgrades
 New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
 choco config set cacheLocation c:\temp
 
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+
 # Source control
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
 choco upgrade tortoisegit
