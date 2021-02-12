@@ -31,7 +31,7 @@ Set-Location $dotfilesPath
 git checkout install-apps
 git pull
 
-. (Join-Path $dotfilesPath scripts/FileExplorerSettings.ps1)
+. (Join-Path $dotfilesPath scripts/Initialize-Windows.ps1)
 . (Join-Path $dotfilesPath scripts/Install-Apps.ps1)
 
 # VS Code Extensions
