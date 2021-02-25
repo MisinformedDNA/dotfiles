@@ -7,6 +7,10 @@ Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/Misinfo
 
 #> 
 
+#TODO Install MS Todo
+#Install GitHub Codespaces for VS Code
+#Install artifacts credential manager
+
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
