@@ -1,4 +1,4 @@
-[Environment]::SetEnvironmentVariable("PULUMI_SKIP_UPDATE_CHECK", $newpath, "User")
+[Environment]::SetEnvironmentVariable("PULUMI_SKIP_UPDATE_CHECK", 1, "User")
 
 function p {
     for ($i = 0; $i -lt $args.Count; $i++) {
@@ -23,4 +23,8 @@ function pr {
 
 function pu {
 	p up @args
+}
+
+function pw {
+    p watch @args
 }

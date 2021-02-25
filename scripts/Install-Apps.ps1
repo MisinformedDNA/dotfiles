@@ -11,8 +11,7 @@ choco upgrade git --params "/NoShellIntegration /NoGitLfs"
 choco upgrade tortoisegit
 
 # Editors
-choco upgrade visualstudio2019enterprise --params "--add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Workload.NetCoreTools
---add Microsoft.VisualStudio.Workload.VisualStudioExtension"
+. (Join-Path $PSScriptRoot Install-VisualStudio.ps1)
 choco upgrade notepadplusplus
 choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 
@@ -35,7 +34,7 @@ choco upgrade winmerge
 choco upgrade adobereader
 choco upgrade microsoft-edge
 choco upgrade microsoft-teams
-choco upgrade onenote
+choco upgrade onenote --ignore-checksum
 choco upgrade powertoys
 choco upgrade slack
 choco upgrade spotify
