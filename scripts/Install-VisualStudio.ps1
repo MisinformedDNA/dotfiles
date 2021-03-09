@@ -13,7 +13,7 @@ function Get-VisualStudioMarketplaceDownloadUrl($itemName) {
     return "$marketplaceUrl$href"
 }
 
-$visualStudioProducts = "Enterprise"
+$products = "Enterprise"
 choco upgrade visualstudio2019enterprise
 Import-Module (Join-Path $env:ChocolateyInstall extensions\chocolatey-visualstudio\chocolatey-visualstudio.extension.psm1)
 
@@ -22,9 +22,14 @@ $workloads = @(
     "NetCoreTools",
     "VisualStudioExtension",
     "NetWeb"
-)
-foreach ($workload in $workloads) {
-    Add-VisualStudioWorkload -PackageName $workload -Workload $workload -VisualStudioYear 2019 -ApplicableProducts "Enterprise" -IncludeRecommendedComponentsByDefault
+) | ForEach-Object {
+    Add-VisualStudioWorkload -PackageName $_ -Workload $_ -VisualStudioYear 2019 -ApplicableProducts $products -IncludeRecommendedComponentsByDefault
+}
+
+$components = @(
+    "Microsoft.VisualStudio.Component.AzureDevOps.OfficeIntegration"
+) | ForEach-Object {
+    Add-VisualStudioComponent -PackageName $_ -Component $_ -VisualStudioYear 2019 -ApplicableProducts $products
 }
 
 $vsixNames = @(
@@ -34,9 +39,7 @@ $vsixNames = @(
     "MadsKristensen.FileNesting",
     "MadsKristensen.ignore",
     "MadsKristensen.SuggestedExtensions",
-    "MadsKristensen.Tweaks",
-)
-
-foreach ($vsixName in $vsixNames) {
-    Install-VisualStudioVsixExtensionFromVSMarketplace $vsixName
+    "MadsKristensen.Tweaks"
+) | ForEach-Object {
+    Install-VisualStudioVsixExtensionFromVSMarketplace $_
 }
