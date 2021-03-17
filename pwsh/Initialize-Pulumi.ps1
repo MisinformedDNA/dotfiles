@@ -11,18 +11,18 @@ function p {
 }
 
 function pd {
-	p destroy @args
+    p destroy @args
 }
 function pp {
-	p preview @args
+    p preview @args
 }
 
 function pr {
-	p refresh @args
+    p refresh @args
 }
 
 function pu {
-	p up @args
+    p up @args
 }
 
 function pw {
