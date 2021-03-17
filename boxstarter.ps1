@@ -32,7 +32,7 @@ Set-Location $reposPath
 git clone https://github.com/MisinformedDNA/dotfiles/
 
 Set-Location $dotfilesPath
-git checkout install-apps
+git checkout master
 git pull
 
 . (Join-Path $dotfilesPath scripts/Initialize-Windows.ps1)
