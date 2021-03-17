@@ -38,7 +38,6 @@ $vsixNames = @(
     "MadsKristensen.FileIcons",
     "MadsKristensen.FileNesting",
     "MadsKristensen.ignore",
-    "MadsKristensen.SuggestedExtensions",
     "MadsKristensen.Tweaks"
 ) | ForEach-Object {
     Install-VisualStudioVsixExtensionFromVSMarketplace $_
