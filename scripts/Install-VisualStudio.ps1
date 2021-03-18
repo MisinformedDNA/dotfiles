@@ -13,11 +13,25 @@ function Get-VisualStudioMarketplaceDownloadUrl($itemName) {
     return "$marketplaceUrl$href"
 }
 
+function ShouldInstallVsixes {
+    $path = Join-Path $env:LOCALAPPDATA "PersonalSettings"
+    New-Item $path -ItemType Directory -ErrorAction SilentlyContinue
+
+    $filePath = Join-Path $path "vsixinstallation.txt"
+    return (-not (Test-Path $filePath))
+}
+
+function MarkInstalledVsixes {
+    $path = Join-Path $env:LOCALAPPDATA "PersonalSettings"
+    $filePath = Join-Path $path "vsixinstallation.txt"
+    Set-Content -Path $filePath -Value (Get-Date)
+}
+
 $products = "Enterprise"
 choco upgrade visualstudio2019enterprise
 Import-Module (Join-Path $env:ChocolateyInstall extensions\chocolatey-visualstudio\chocolatey-visualstudio.extension.psm1)
 
-$workloads = @(
+@(
     "Azure",
     "NetCoreTools",
     "VisualStudioExtension",
@@ -26,19 +40,24 @@ $workloads = @(
     Add-VisualStudioWorkload -PackageName $_ -Workload $_ -VisualStudioYear 2019 -ApplicableProducts $products -IncludeRecommendedComponentsByDefault
 }
 
-$components = @(
+@(
     "Microsoft.VisualStudio.Component.AzureDevOps.OfficeIntegration"
 ) | ForEach-Object {
     Add-VisualStudioComponent -PackageName $_ -Component $_ -VisualStudioYear 2019 -ApplicableProducts $products
 }
 
-$vsixNames = @(
-    "MadsKristensen.AddNewFile"
-    "MadsKristensen.EditorConfig",
-    "MadsKristensen.FileIcons",
-    "MadsKristensen.FileNesting",
-    "MadsKristensen.ignore",
-    "MadsKristensen.Tweaks"
-) | ForEach-Object {
-    Install-VisualStudioVsixExtensionFromVSMarketplace $_
+
+if (ShouldInstallVsixes) {
+    @(
+        "MadsKristensen.AddNewFile"
+        "MadsKristensen.EditorConfig",
+        "MadsKristensen.FileIcons",
+        "MadsKristensen.FileNesting",
+        "MadsKristensen.ignore",
+        "MadsKristensen.Tweaks"
+    ) | ForEach-Object {
+        Install-VisualStudioVsixExtensionFromVSMarketplace $_ -ErrorAction Ignore
+    }
+
+    MarkInstalledVsixes
 }
