@@ -26,9 +26,10 @@ choco upgrade dotpeek
 choco upgrade fiddler
 choco upgrade microsoftazurestorageexplorer
 choco upgrade postman
-choco upgrade sql-server-management-studio
+choco upgrade azure-data-studio
 choco upgrade sysinternals
 choco upgrade winmerge
+iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx -Force"
 
 # Other
 choco upgrade adobereader
@@ -43,5 +44,3 @@ choco upgrade spotify
 choco upgrade powershell-core
 choco upgrade microsoft-windows-terminal
 
-Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2076587 -OutFile azuredevops_inttooloffice2019_enu.exe
-./azuredevops_inttooloffice2019_enu.exe /quiet
