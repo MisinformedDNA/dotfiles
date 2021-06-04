@@ -16,22 +16,11 @@ Import-Module ZLocation
 function c {
 	code
 }
+
 function cleanbin {
 	Get-ChildItem .\ -Include bin,obj -Recurse `
 		| ?{ -not $_.FullName.Contains('CMSModules') } `
 		| %{ Remove-Item $_.FullName -Force -Recurse }
-}
-
-$dotnet = "D:\Repos\corefxlab\dotnetcli\dotnet.exe"
-	
-function dn {
-	Invoke-Expression $dotnet
-}
-
-function pollingtest(
-		[string]$Configuration = "Debug",
-		[string]$testFile = "D:\Repos\corefxlab\tests\System.IO.FileSystem.Watcher.Polling.Tests\System.IO.FileSystem.Watcher.Polling.Tests.csproj") {
-	Invoke-Expression "$dotnet test $testFile -c $Configuration --no-build -- -notrait category=DerivedTests" #-notrait category=performance -notrait category=outerloop  
 }
 
 function w {
