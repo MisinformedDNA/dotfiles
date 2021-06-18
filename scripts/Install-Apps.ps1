@@ -8,6 +8,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 # Source control
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
+git config --global init.defaultBranch main
 choco upgrade tortoisegit
 
 # Editors
