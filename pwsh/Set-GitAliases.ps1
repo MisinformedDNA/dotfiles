@@ -118,3 +118,11 @@ function fixauthorall {
 }
 
 Set-Alias faa fixauthorall
+
+function gprune { 
+    git branch --merged | 
+        ForEach-Object{ $_.Substring(2) } | 
+        Where-Object{ $_ -ne "master" } | 
+        Where-Object{ $_ -ne "main" } | 
+        ForEach-Object{ git branch -d $_ }
+}
