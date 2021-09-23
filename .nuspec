@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>misinformeddna.boxstarter</id>
+    <version>1.0.0</version>
+    <authors>Dan Friedman</authors>
+    <owners>Dan Friedman</owners>
+    <description>Boxstarter package to set up my development machine.</description>
+    <tags>Boxstarter</tags>
+  </metadata>
+</package>
