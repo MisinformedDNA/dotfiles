@@ -32,7 +32,12 @@ jobs:
         with:
           path: '*.nupkg'
 
+      - name: Add NuGet source
+        run: |
+          dotnet nuget add source --username MisinformedDNA --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/MisinformedDNA/index.json"
+
       - name: Publish NuGet package
         # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
-          nuget.exe push *.nupkg ${{secrets.GITHUB_TOKEN}} -SkipDuplicate -NonInteractive -Source https://nuget.pkg.github.com/MisinformedDNA/index.json
+          dotnet nuget push .\boxstarter.1.0.0.nupkg --source "github"
+          #  nuget.exe push *.nupkg ${{secrets.GITHUB_TOKEN}} -SkipDuplicate -NonInteractive -Source https://nuget.pkg.github.com/MisinformedDNA/index.json
