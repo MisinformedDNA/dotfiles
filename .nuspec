@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>misinformeddna.boxstarter</id>
+    <id>boxstarter</id>
     <version>1.0.0</version>
     <authors>Dan Friedman</authors>
     <owners>Dan Friedman</owners>
     <description>Boxstarter package to set up my development machine.</description>
     <tags>Boxstarter</tags>
+    <repository type="git" url="https://github.com/MisinformedDNA/dotfiles.git" />
   </metadata>
 </package>
