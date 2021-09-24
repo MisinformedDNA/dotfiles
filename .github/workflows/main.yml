@@ -32,10 +32,7 @@ jobs:
         with:
           path: '*.nupkg'
 
-      - name: Push Nupkg to GitHub Packages
-        uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
-        with:
-          nupkg-path: '*.nupkg'
-          repo-owner: MisinformedDNA
-          gh-user: MisinformedDNA
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish NuGet package
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          nuget.exe push *.nupkg ${{secrets.GITHUB_TOKEN}} -SkipDuplicate -NonInteractive -Source https://nuget.pkg.github.com/MisinformedDNA/index.json
