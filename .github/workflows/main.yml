@@ -16,11 +16,6 @@ jobs:
       
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
-        # with:
-          # # NuGet API Key to configure.
-          # nuget-api-key: # optional
-          # # Source to scope the NuGet API Key to.
-          # nuget-api-key-source: # optional
 
       - name: Runs NuGet pack
         run: |
@@ -39,5 +34,4 @@ jobs:
       - name: Publish NuGet package
         # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
-          dotnet nuget push .\boxstarter.1.0.0.nupkg --source "github"
-          #  nuget.exe push *.nupkg ${{secrets.GITHUB_TOKEN}} -SkipDuplicate -NonInteractive -Source https://nuget.pkg.github.com/MisinformedDNA/index.json
+          dotnet nuget push *.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
