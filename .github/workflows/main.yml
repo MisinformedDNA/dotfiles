@@ -9,18 +9,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
       
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
-        # with:
-          # # NuGet API Key to configure.
-          # nuget-api-key: # optional
-          # # Source to scope the NuGet API Key to.
-          # nuget-api-key-source: # optional
 
       - name: Runs NuGet pack
         run: |
@@ -32,10 +27,11 @@ jobs:
         with:
           path: '*.nupkg'
 
-      - name: Push Nupkg to GitHub Packages
-        uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
-        with:
-          nupkg-path: '*.nupkg'
-          repo-owner: MisinformedDNA
-          gh-user: MisinformedDNA
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Add NuGet source
+        run: |
+          dotnet nuget add source --username MisinformedDNA --password APIKEY --name github "https://nuget.pkg.github.com/MisinformedDNA/index.json"
+
+      - name: Publish NuGet package
+        # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          dotnet nuget push *.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
