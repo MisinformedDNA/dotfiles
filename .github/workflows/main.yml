@@ -33,6 +33,6 @@ jobs:
           path: '*.nupkg'
 
       - name: Publish NuGet package
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
           nuget.exe push *.nupkg ${{secrets.GITHUB_TOKEN}} -SkipDuplicate -NonInteractive -Source https://nuget.pkg.github.com/MisinformedDNA/index.json
