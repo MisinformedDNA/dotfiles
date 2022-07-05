@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup NuGet.exe for use with actions
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Runs NuGet pack
+        run: |
+          chmod +x $NUGET  
+          nuget.exe pack -NoDefaultExcludes
+          
+      - name: Upload NuGet package
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          path: '*.nupkg'
+
+      - name: Add NuGet source
+        run: |
+          dotnet nuget add source --username MisinformedDNA --password APIKEY --name github "https://nuget.pkg.github.com/MisinformedDNA/index.json"
+
+      - name: Publish NuGet package
+        # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          dotnet nuget push *.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
