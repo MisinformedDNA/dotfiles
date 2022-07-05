@@ -8,9 +8,6 @@ Import-Module oh-my-posh
 
 Set-PoshPrompt -Theme paradox
 
-# Must occur after other prompt modifiers
-Import-Module ZLocation
-
 [System.Environment]::SetEnvironmentVariable("POWERSHELL_UPDATECHECK", "Off", "User")
 
 # . $PSScriptRoot/Set-Aliases.ps1
