@@ -45,3 +45,4 @@ choco upgrade spotify
 choco upgrade powershell-core
 choco upgrade microsoft-windows-terminal
 
+winget install JanDeDobbeleer.OhMyPosh -s winget
