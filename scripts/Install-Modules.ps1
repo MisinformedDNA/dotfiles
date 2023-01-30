@@ -2,6 +2,7 @@ Write-Output "Installing Powershell modules..."
 
 $modules = @(
     "posh-git",
+    "PSReadLine", 
     "ZLocation"
 )
 
