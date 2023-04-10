@@ -34,12 +34,6 @@ function tg { TortoiseGitProc.exe /command:$args }
 
 function tgc { tg commit }
 
-function gct { tg commit }
-
-function cdz() {
-	z $args
-}
-
 # Chocolatey profile
 # $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 # if (Test-Path($ChocolateyProfile)) {

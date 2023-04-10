@@ -11,7 +11,7 @@ function anythingStaged {
     return $numberStaged -gt 0
 }
 
-function g { git @args }
+Set-Alias -Name g -Value git
 
 function ga { git add @args }
 
@@ -24,6 +24,12 @@ function gap { git add -p @args }
 function gau { git add -u @args }
 
 function gb { git branch $args }
+$scriptBlock = {
+    param($wordToComplete, $commandAst, $cursorPosition)
+
+    Expand-GitCommand "git branch $wordToComplete"
+}
+Register-ArgumentCompleter -Native -CommandName gb -ScriptBlock $scriptBlock
 
 function gbd { git branch -d $args }
 
@@ -33,7 +39,6 @@ function gcm {
     }
     else {
         Write-Host $nothingToCommit
-        exit
     }
 }
 
@@ -42,7 +47,6 @@ function gcma { git commit --amend --no-edit }
 function gcmm([string]$message) {
     if (-not (anythingStaged)) {
         Write-Host $nothingToCommit
-        exit
     }
 
     if ([string]::IsNullOrEmpty($message)) {
@@ -53,8 +57,20 @@ function gcmm([string]$message) {
 }
 
 function gco { git checkout @args }
+$scriptBlock = {
+    param($wordToComplete, $commandAst, $cursorPosition)
+
+    Expand-GitCommand "git checkout $wordToComplete"
+}
+Register-ArgumentCompleter -Native -CommandName gco -ScriptBlock $scriptBlock
 
 function gcob { git checkout -b @args }
+$scriptBlock = {
+    param($wordToComplete, $commandAst, $cursorPosition)
+
+    Expand-GitCommand "git checkout -b $wordToComplete"
+}
+Register-ArgumentCompleter -Native -CommandName gcob -ScriptBlock $scriptBlock
 
 function gcp([string]$message) { gcmm $message; gp }
 
@@ -63,6 +79,12 @@ function gd { git diff @args }
 function gds { git diff --staged @args }
 
 function gl { git log @args }
+$scriptBlock = {
+    param($wordToComplete, $commandAst, $cursorPosition)
+
+    Expand-GitCommand "git log $wordToComplete"
+}
+Register-ArgumentCompleter -Native -CommandName gl -ScriptBlock $scriptBlock
 
 function gopen { $url = git remote get-url origin; Start-Process $url }
 
