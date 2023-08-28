@@ -1,5 +1,6 @@
 Write-Host "  Setting up Git aliases..."
 
+Remove-Alias gc -Force -ErrorAction SilentlyContinue
 Remove-Alias gcm -Force -ErrorAction SilentlyContinue
 Remove-Alias gl -Force -ErrorAction SilentlyContinue
 Remove-Alias gp -Force -ErrorAction SilentlyContinue
@@ -33,27 +34,21 @@ Register-ArgumentCompleter -Native -CommandName gb -ScriptBlock $scriptBlock
 
 function gbd { git branch -d $args }
 
-function gcm {
-    if (anythingStaged) {
-        git commit @args
-    }
-    else {
-        Write-Host $nothingToCommit
-    }
-}
-
 function gcma { git commit --amend --no-edit }
+
+function gc { git commit @args }
 
 function gcmm([string]$message) {
     if (-not (anythingStaged)) {
         Write-Host $nothingToCommit
+        return
     }
 
     if ([string]::IsNullOrEmpty($message)) {
         $message = Read-Host -Prompt "Commit message"
     }
 
-    gcm -m $message
+    git commit -m $message
 }
 
 function gco { git checkout @args }
@@ -147,4 +142,9 @@ function gprune {
         Where-Object{ $_ -ne "master" } | 
         Where-Object{ $_ -ne "main" } | 
         ForEach-Object{ git branch -d $_ }
+}
+
+function Remove-GitRemoteGoneBranches {
+    git fetch --prune
+    git branch -vv | Select-String -Pattern ": gone]" | ForEach-Object { $_.toString().Trim().Split(" ")[0] } | ForEach-Object { git branch -D $_ }
 }
