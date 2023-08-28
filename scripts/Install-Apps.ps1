@@ -23,7 +23,7 @@ choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
 # CLIs
 choco upgrade azure-cli
 choco upgrade nodejs-lts
-choco upgrade pulumi
+#choco upgrade pulumi
 
 # Tools
 choco upgrade azure-cosmosdb-emulator
@@ -33,16 +33,19 @@ choco upgrade microsoftazurestorageexplorer
 choco upgrade postman
 choco upgrade azure-data-studio
 choco upgrade sysinternals
+
 choco upgrade winmerge
+$env:path += ";C:\Program Files\WinMerge"
+
 iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx -Force"
 
 # Other
 choco upgrade adobereader
-choco upgrade microsoft-edge
-choco upgrade microsoft-teams
-choco upgrade onenote --ignore-checksum
+#choco upgrade microsoft-edge
+#choco upgrade microsoft-teams
+#choco upgrade onenote --ignore-checksum
 choco upgrade powertoys
-choco upgrade slack
+#choco upgrade slack
 choco upgrade spotify
 
 # Terminals
