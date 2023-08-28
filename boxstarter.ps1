@@ -18,7 +18,7 @@ New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
 choco config set cacheLocation c:\temp
 
 # Windows
-Install-WindowsUpdate -acceptEula
+#Install-WindowsUpdate -acceptEula
 
 choco upgrade git --params "/NoShellIntegration /NoGitLfs"
 refreshenv
