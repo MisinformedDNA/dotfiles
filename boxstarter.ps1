@@ -20,7 +20,7 @@ choco config set cacheLocation c:\temp
 # Windows
 #Install-WindowsUpdate -acceptEula
 
-choco upgrade git --params "/NoShellIntegration /NoGitLfs"
+choco upgrade git --params "'/NoShellIntegration /NoGitLfs'"
 refreshenv
 
 # # Clone dotfiles
