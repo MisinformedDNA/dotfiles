@@ -2,8 +2,8 @@
 
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
-Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
-#http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/boxstarter/boxstarter.ps1
+Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/main/boxstarter.ps1
+#http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/main/boxstarter.ps1
 
 #> 
 
@@ -32,7 +32,7 @@ Set-Location $reposPath
 git clone https://github.com/MisinformedDNA/dotfiles/
 
 Set-Location $dotfilesPath
-git checkout master
+git checkout main
 git pull
 
 . (Join-Path $dotfilesPath scripts/Initialize-Windows.ps1)
