@@ -28,7 +28,7 @@ function MarkInstalledVsixes {
 }
 
 $products = "Enterprise"
-choco upgrade visualstudio2019enterprise
+choco upgrade visualstudio2022enterprise
 Import-Module (Join-Path $env:ChocolateyInstall extensions\chocolatey-visualstudio\chocolatey-visualstudio.extension.psm1)
 
 @(
@@ -37,19 +37,18 @@ Import-Module (Join-Path $env:ChocolateyInstall extensions\chocolatey-visualstud
     "VisualStudioExtension",
     "NetWeb"
 ) | ForEach-Object {
-    Add-VisualStudioWorkload -PackageName $_ -Workload $_ -VisualStudioYear 2019 -ApplicableProducts $products -IncludeRecommendedComponentsByDefault
+    Add-VisualStudioWorkload -PackageName $_ -Workload $_ -VisualStudioYear 2022 -ApplicableProducts $products -IncludeRecommendedComponentsByDefault
 }
 
 @(
     "Microsoft.VisualStudio.Component.AzureDevOps.OfficeIntegration"
 ) | ForEach-Object {
-    Add-VisualStudioComponent -PackageName $_ -Component $_ -VisualStudioYear 2019 -ApplicableProducts $products
+    Add-VisualStudioComponent -PackageName $_ -Component $_ -VisualStudioYear 2022 -ApplicableProducts $products
 }
 
 
 if (ShouldInstallVsixes) {
     @(
-        "MadsKristensen.AddNewFile"
         "MadsKristensen.EditorConfig",
         "MadsKristensen.FileIcons",
         "MadsKristensen.FileNesting",
