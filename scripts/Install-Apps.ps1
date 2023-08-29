@@ -17,7 +17,7 @@ choco upgrade tortoisegit
 winget install --id Microsoft.VisualStudio.2022.Enterprise
 #. (Join-Path $PSScriptRoot Install-VisualStudio.ps1)
 choco upgrade notepadplusplus
-choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
+choco upgrade vscode --params="'/NoDesktopIcon /NoQuicklaunchIcon'"
 
 # CLIs
 choco upgrade azure-cli
