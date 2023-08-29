@@ -39,11 +39,11 @@ git pull
 . (Join-Path $dotfilesPath scripts/Install-Apps.ps1)
 
 # VS Code Extensions
-Write-Host "Install VS Code extensions"
-code --install-extension ms-dotnettools.csharp
-code --install-extension ms-vscode.powershell
-code --install-extension eamodio.gitlens
-code --install-extension davidanson.vscode-markdownlint
+#Write-Host "Install VS Code extensions"
+#code --install-extension ms-dotnettools.csharp
+#code --install-extension ms-vscode.powershell
+#code --install-extension eamodio.gitlens
+#code --install-extension davidanson.vscode-markdownlint
 
 # Powershell Modules
 Write-Host "Install NuGet"
