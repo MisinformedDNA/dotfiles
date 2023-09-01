@@ -6,6 +6,12 @@ choco config set cacheLocation c:\temp
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
+# Terminals
+choco upgrade powershell-core
+choco upgrade microsoft-windows-terminal
+
+winget install JanDeDobbeleer.OhMyPosh -s winget
+
 # Source control
 # Already installed: git
 git config --global init.defaultBranch main
@@ -46,9 +52,3 @@ choco upgrade adobereader
 choco upgrade powertoys
 #choco upgrade slack
 choco upgrade spotify
-
-# Terminals
-choco upgrade powershell-core
-choco upgrade microsoft-windows-terminal
-
-winget install JanDeDobbeleer.OhMyPosh -s winget
