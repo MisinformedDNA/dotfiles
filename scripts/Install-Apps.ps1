@@ -14,7 +14,7 @@ git config --global push.autoSetupRemote true
 choco upgrade tortoisegit
 
 # Editors
-winget install --id Microsoft.VisualStudio.2022.Enterprise
+choco upgrade visualstudio2022enterprise
 #. (Join-Path $PSScriptRoot Install-VisualStudio.ps1)
 choco upgrade notepadplusplus
 choco upgrade vscode --params="'/NoDesktopIcon /NoQuicklaunchIcon'"
