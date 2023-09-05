@@ -53,3 +53,6 @@ choco upgrade powershell-core
 choco upgrade microsoft-windows-terminal
 
 winget install JanDeDobbeleer.OhMyPosh -s winget
+oh-my-posh font install CascadioCode
+
+. (Join-Path $PSScriptRoot ../apps/WindowsTerminal/setup.ps1)
