@@ -21,6 +21,15 @@ oh-my-posh font install CascadiaCode
 git config --global init.defaultBranch main
 git config --global push.autoSetupRemote true
 
+# Set LOL git config
+if ($env:UserDomain -eq "ENT") {
+    $customConfigPath = Join-Path $env:UserProfile ".lol.gitconfig"
+    New-Item $customConfigPath -ItemType File -ErrorAction SilentlyContinue
+    git config --file=$customConfigPath user.email "[Email]"
+
+    git config --global includeIf.gitdir:C:/repos/lol/.path $customConfigPath
+}
+
 choco upgrade tortoisegit
 
 # Editors
