@@ -11,23 +11,23 @@ choco upgrade powershell-core
 choco upgrade microsoft-windows-terminal
 
 winget install JanDeDobbeleer.OhMyPosh -s winget
+oh-my-posh font install CascadiaCode
+
+. (Join-Path $PSScriptRoot ../apps/WindowsTerminal/setup.ps1)
+
 
 # Source control
-# Git should already be installed
+# Already installed: git
 git config --global init.defaultBranch main
 git config --global push.autoSetupRemote true
 
 choco upgrade tortoisegit
 
-winget install JanDeDobbeleer.OhMyPosh -s winget
-oh-my-posh font install CascadiaCode
-
-. (Join-Path $PSScriptRoot ../apps/WindowsTerminal/setup.ps1)
-
 # Editors
-. (Join-Path $PSScriptRoot Install-VisualStudio.ps1)
+#choco upgrade visualstudio2022enterprise
+#. (Join-Path $PSScriptRoot Install-VisualStudio.ps1)
 choco upgrade notepadplusplus
-choco upgrade vscode --params "/NoDesktopIcon /NoQuicklaunchIcon"
+choco upgrade vscode --params="'/NoDesktopIcon /NoQuicklaunchIcon'"
 
 # CLIs
 choco upgrade azure-cli
