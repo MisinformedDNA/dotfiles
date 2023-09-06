@@ -20,6 +20,7 @@ oh-my-posh font install CascadiaCode
 # Already installed: git
 git config --global init.defaultBranch main
 git config --global push.autoSetupRemote true
+git config --global alias.cp cherry-pick
 
 # Set LOL git config
 if ($env:UserDomain -eq "ENT") {
