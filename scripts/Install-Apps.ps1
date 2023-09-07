@@ -20,6 +20,8 @@ oh-my-posh font install CascadiaCode
 # Already installed: git
 git config --global init.defaultBranch main
 git config --global push.autoSetupRemote true
+git config --global user.name "MisinformedDNA"
+git config --global user.email "1784452+MisinformedDNA@users.noreply.github.com"
 git config --global alias.cp cherry-pick
 
 # Set LOL git config
