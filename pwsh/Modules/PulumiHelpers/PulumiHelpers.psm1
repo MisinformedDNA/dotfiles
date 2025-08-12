@@ -1,5 +1,4 @@
-[Environment]::SetEnvironmentVariable("PULUMI_SKIP_UPDATE_CHECK", 1, "User")
-
+# Pulumi PowerShell Module
 function p {
     for ($i = 0; $i -lt $args.Count; $i++) {
         if ($args[$i] -eq "sp") {
@@ -13,6 +12,7 @@ function p {
 function pd {
     p destroy @args
 }
+
 function pp {
     p preview @args
 }
@@ -28,3 +28,6 @@ function pu {
 function pw {
     p watch @args
 }
+
+# Export functions so they're available when module is imported
+Export-ModuleMember -Function p, pd, pp, pr, pu, pw
