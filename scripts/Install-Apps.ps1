@@ -26,12 +26,15 @@ git config --global alias.cp cherry-pick
 
 # Set LOL git config
 if ($env:UserDomain -eq "ENT") {
-    $customConfigPath = Join-Path $env:UserProfile ".lol.gitconfig"
-    if (-not (Test-Path $customConfigPath)) {
-        New-Item $customConfigPath -ItemType File -ErrorAction SilentlyContinue
-        git config --file=$customConfigPath user.email "[Email]"
+    $lolConfigPath = "c:/Users/$env:USERNAME/.lol.gitconfig"
+    if (-not (Test-Path $lolConfigPath)) {
+        New-Item $lolConfigPath -ItemType File -ErrorAction SilentlyContinue
+        git config --file=$lolConfigPath user.name ""
+        git config --file=$lolConfigPath user.email ""
 
-        git config --global includeIf.gitdir:C:/repos/lol/.path $customConfigPath
+        git config --global includeIf."gitdir:c:/repos/lol/".path $lolConfigPath
+        git config --global includeIf."gitdir:c:/repos/lolgh/".path $lolConfigPath
+        Write-Host "Configured git credentials for c:/repos/lol/ and c:/repos/lolgh/ directories"
     }
 }
 
