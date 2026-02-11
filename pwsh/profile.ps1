@@ -5,8 +5,24 @@ Write-Host "Loading profile.ps1"
 . (Join-Path $PSScriptRoot "Set-GitAliases.ps1")
 
 # Load oh-my-posh (usually the fastest prompt option)
+if (-not $IsWindows) {
+    $addPaths = @('/usr/local/bin','/usr/local/sbin')
+    foreach ($p in $addPaths) {
+        $split = $env:PATH -split ':'
+        if (-not ($split -contains $p)) {
+            $env:PATH = "$env:PATH:$p"
+        }
+    }
+}
+
+# Load oh-my-posh (usually the fastest prompt option)
 if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
-    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\paradox.omp.json" | Invoke-Expression
+    if ($env:POSH_THEMES_PATH) {
+        $themePath = Join-Path $env:POSH_THEMES_PATH 'paradox.omp.json'
+    } else {
+        $themePath = 'paradox'
+    }
+    oh-my-posh init pwsh --config $themePath | Invoke-Expression
 }
 
 # Load posh-git for git aliases and tab completion only (disable its prompt)
