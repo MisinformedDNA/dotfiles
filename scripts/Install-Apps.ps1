@@ -1,28 +1,21 @@
-Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-choco feature enable -n=useRememberedArgumentsForUpgrades
-
-New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
-choco config set cacheLocation c:\temp
-
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+# Enable Hyper-V if supported (requires Windows Pro/Enterprise/Education)
+try { 
+    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart -ErrorAction Stop 
+} catch { 
+    Write-Warning "Hyper-V not available (requires Windows Pro/Enterprise/Education)" 
+}
 
 # Terminals
-choco upgrade powershell-core
-choco upgrade microsoft-windows-terminal
-
-winget install JanDeDobbeleer.OhMyPosh -s winget
+winget install --id Microsoft.PowerShell --exact --accept-package-agreements --accept-source-agreements
+winget install --id JanDeDobbeleer.OhMyPosh --exact --accept-package-agreements --accept-source-agreements
 oh-my-posh font install CascadiaCode
 
 . (Join-Path $PSScriptRoot ../apps/WindowsTerminal/setup.ps1)
 
-
 # Source control
-# Already installed: git
-git config --global init.defaultBranch main
-git config --global push.autoSetupRemote true
-git config --global user.name "MisinformedDNA"
-git config --global user.email "1784452+MisinformedDNA@users.noreply.github.com"
-git config --global alias.cp cherry-pick
+winget install --id Git.Git --exact --accept-package-agreements --accept-source-agreements
+winget install --id Microsoft.GitCredentialManager --exact --accept-package-agreements --accept-source-agreements
+. (Join-Path $PSScriptRoot Configure-Git.ps1)
 
 # Set LOL git config
 if ($env:UserDomain -eq "ENT") {
@@ -38,38 +31,14 @@ if ($env:UserDomain -eq "ENT") {
     }
 }
 
-choco upgrade tortoisegit
+winget install --id TortoiseGit.TortoiseGit --exact --accept-package-agreements --accept-source-agreements
 
 # Editors
-#choco upgrade visualstudio2022enterprise
-#. (Join-Path $PSScriptRoot Install-VisualStudio.ps1)
-choco upgrade notepadplusplus
-choco upgrade vscode --params="'/NoDesktopIcon /NoQuicklaunchIcon'"
-
-# CLIs
-choco upgrade azure-cli
-choco upgrade nodejs-lts
-#choco upgrade pulumi
+winget install --id Microsoft.VisualStudioCode --exact --accept-package-agreements --accept-source-agreements --override '/VERYSILENT /NORESTART /MERGETASKS=!runcode,!desktopicon,!quicklaunchicon'
 
 # Tools
-choco upgrade azure-cosmosdb-emulator
-choco upgrade dotpeek
-choco upgrade fiddler
-choco upgrade microsoftazurestorageexplorer
-choco upgrade postman
-choco upgrade azure-data-studio
-choco upgrade sysinternals
-
-choco upgrade winmerge
-$env:path += ";C:\Program Files\WinMerge"
-
-iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx -Force"
+winget install --id WinMerge.WinMerge --exact --accept-package-agreements --accept-source-agreements
 
 # Other
-choco upgrade adobereader
-#choco upgrade microsoft-edge
-#choco upgrade microsoft-teams
-#choco upgrade onenote --ignore-checksum
-choco upgrade powertoys
-#choco upgrade slack
-choco upgrade spotify
+winget install --id Microsoft.PowerToys --exact --accept-package-agreements --accept-source-agreements
+winget install --id Spotify.Spotify --exact --accept-package-agreements --accept-source-agreements

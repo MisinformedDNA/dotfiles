@@ -7,18 +7,11 @@ Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/Misinfo
 
 #> 
 
-#TODO Install MS Todo
-#Install GitHub Codespaces for VS Code
-#Install artifacts credential manager
-
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 choco feature enable -n=useRememberedArgumentsForUpgrades
 
 New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
 choco config set cacheLocation c:\temp
-
-# Windows
-#Install-WindowsUpdate -acceptEula
 
 choco upgrade git --params="'/NoShellIntegration /NoGitLfs'"
 refreshenv
@@ -37,26 +30,8 @@ git pull
 
 . (Join-Path $dotfilesPath scripts/Initialize-Windows.ps1)
 . (Join-Path $dotfilesPath scripts/Install-Apps.ps1)
-
-# VS Code Extensions
-#Write-Host "Install VS Code extensions"
-#code --install-extension ms-dotnettools.csharp
-#code --install-extension ms-vscode.powershell
-#code --install-extension eamodio.gitlens
-#code --install-extension davidanson.vscode-markdownlint
-
-# Powershell Modules
-Write-Host "Install NuGet"
-Install-PackageProvider NuGet -Force
-Write-Host "Install PowerShellGet"
-Install-Module PowerShellGet -Force; Import-Module PowerShellGet
-Write-Host "Install Az"
-Install-Module Az -AllowClobber -Scope CurrentUser -Force
-Write-Host "Install ZLocation"
-Install-Module ZLocation -Scope CurrentUser -Force
-Write-Host "Install posh-git"
-powershell -Command { Install-Module posh-git -Scope CurrentUser -Force -AllowPrerelease }
+. (Join-Path $dotfilesPath scripts/Install-PowershellModules.ps1)
 
 Write-Host "Calling powershell setup"
-$pwshSetupPath = Join-Path $dotfilesPath "/scripts/setup-pwsh.ps1"
+$pwshSetupPath = Join-Path $dotfilesPath "/scripts/Setup-PowerShell.ps1"
 pwsh -File $pwshSetupPath

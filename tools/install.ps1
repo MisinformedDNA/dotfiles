@@ -1,1 +1,0 @@
-. (Join-Path $PSScriptRoot "..\boxstarter.ps1")
