@@ -48,3 +48,9 @@ Set-Alias r repos -Force
 function cleanbin {
 	Get-ChildItem .\ -Include bin,obj -Recurse | ForEach-Object { Remove-Item $_.FullName -Force -Recurse }
 }
+
+# Windows-only TortoiseGit integration
+if ($IsWindows -or $env:OS -eq "Windows_NT") {
+	function tg { TortoiseGitProc.exe /command:$args }
+	function tgc { tg commit }
+}
