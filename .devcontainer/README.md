@@ -9,7 +9,6 @@ This devcontainer configuration sets up a PowerShell development environment in 
   - `PSReadLine` - Command-line editing
   - `ZLocation` - Directory navigation
 - Oh My Posh - Prompt theming
-- GitStore module - Custom git user management
 - PowerShell profile from `pwsh/profile.ps1`
 
 ## Git configuration

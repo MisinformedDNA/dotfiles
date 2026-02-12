@@ -19,11 +19,15 @@ if (Test-Path $wtSettingsPath) {
 }
 
 # Create symlink to repo settings
-try {
-    New-Item -ItemType SymbolicLink -Path $wtSettingsPath -Target $repoSettingsPath -Force | Out-Null
-    Write-Host "Created symlink: Windows Terminal settings -> $repoSettingsPath"
-} catch {
-    Write-Warning "Failed to create symlink (requires admin or Developer Mode): $_"
-    Write-Host "Falling back to copy..."
+$symlink = New-Item -ItemType SymbolicLink -Path $wtSettingsPath -Target $repoSettingsPath -Force -ErrorAction SilentlyContinue
+
+if ($symlink) {
+    Write-Host "Created symlink: Windows Terminal settings -> $repoSettingsPath" -ForegroundColor Green
+} else {
+    Write-Warning "Failed to create symlink. This requires either:"
+    Write-Warning "  1. Running as Administrator, OR"
+    Write-Warning "  2. Enabling Developer Mode (Settings > Privacy & Security > For developers > Developer Mode)"
+    Write-Host "`nFalling back to copy..." -ForegroundColor Yellow
     Copy-Item $repoSettingsPath $wtSettingsPath -Force
+    Write-Host "Settings copied. Note: Changes to the repo won't auto-sync. Re-run this script to update." -ForegroundColor Cyan
 }

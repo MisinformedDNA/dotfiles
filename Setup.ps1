@@ -11,7 +11,10 @@ Write-Host "Installing Oh My Posh..." -ForegroundColor Cyan
 if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
     if ($IsWindows) {
         if (Get-Command winget -ErrorAction SilentlyContinue) {
-            try { winget install --id JanDeDobbeleer.OhMyPosh -e --silent } catch { Write-Warning "winget install failed: $_" }
+            winget install --id JanDeDobbeleer.OhMyPosh -e --silent
+            if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+                Write-Warning "Oh My Posh installation failed. Please install manually from https://ohmyposh.dev"
+            }
         } else {
             Write-Warning "No winget found; please install Oh My Posh manually on Windows."
         }
@@ -19,18 +22,24 @@ if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
         $downloadUrl = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64"
         $tempPath = "/tmp/oh-my-posh"
         $targetPath = "/usr/local/bin/oh-my-posh"
-        try {
-            Invoke-WebRequest -Uri $downloadUrl -OutFile $tempPath -ErrorAction Stop
-            try {
-                Move-Item -Path $tempPath -Destination $targetPath -Force -ErrorAction Stop
-                & chmod +x $targetPath
-            } catch {
+        
+        Invoke-WebRequest -Uri $downloadUrl -OutFile $tempPath -ErrorAction SilentlyContinue
+        
+        if (Test-Path $tempPath) {
+            Move-Item -Path $tempPath -Destination $targetPath -Force -ErrorAction SilentlyContinue
+            
+            if (-not (Test-Path $targetPath)) {
                 Write-Host "Permission required to move to $targetPath; trying with sudo..." -ForegroundColor Yellow
                 sudo mv $tempPath $targetPath
-                sudo chmod +x $targetPath
             }
-        } catch {
-            Write-Warning "Failed to download or install Oh My Posh: $_"
+            
+            if (Test-Path $targetPath) {
+                & chmod +x $targetPath
+            } else {
+                Write-Warning "Failed to install Oh My Posh to $targetPath"
+            }
+        } else {
+            Write-Warning "Failed to download Oh My Posh from $downloadUrl"
         }
     }
 }
@@ -46,7 +55,10 @@ if (-not $IsWindows) {
     }
     $paradoxPath = Join-Path $env:POSH_THEMES_PATH "paradox.omp.json"
     if (-not (Test-Path $paradoxPath)) {
-        try { Invoke-WebRequest -Uri "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/paradox.omp.json" -OutFile $paradoxPath -ErrorAction Stop } catch { Write-Warning "Could not download paradox theme: $_" }
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/paradox.omp.json" -OutFile $paradoxPath -ErrorAction SilentlyContinue
+        if (-not (Test-Path $paradoxPath)) {
+            Write-Warning "Could not download paradox theme. Will use built-in theme."
+        }
     }
 }
 

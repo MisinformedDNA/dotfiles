@@ -18,7 +18,7 @@ function ga { git add @args }
 
 function gac([string]$message) { gau; gcmm $message }
 
-function gacp([string]$message) { gac; gp }
+function gacp([string]$message) { gac $message; gp }
 
 function gap { git add -p @args }
 
@@ -99,8 +99,8 @@ function gcl([string] $url, [string] $directory = '') {
     Write-Host "git config --get user.email is set to '$email'"
 }
 
-function master {
-    git checkout master
+function main {
+    git checkout main
 }
 
 function replaceorigin([string] $url) {
@@ -108,14 +108,14 @@ function replaceorigin([string] $url) {
     git remote add origin $url
 }
 
-function updatemaster {
+function updatemain {
     git fetch upstream
-    git checkout master
+    git checkout main
     if ($lastexitcode -ne 0) {
         "break"
         break
     }
-    git merge upstream/master
+    git merge upstream/main
 }
 
 function pipeline() {

@@ -1,8 +1,7 @@
 # Enable Hyper-V if supported (requires Windows Pro/Enterprise/Education)
-try { 
-    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart -ErrorAction Stop 
-} catch { 
-    Write-Warning "Hyper-V not available (requires Windows Pro/Enterprise/Education)" 
+$hyperv = Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart -ErrorAction SilentlyContinue
+if (-not $hyperv) {
+    Write-Warning "Hyper-V not available (requires Windows Pro/Enterprise/Education)"
 }
 
 # Install all apps from winget configuration file
