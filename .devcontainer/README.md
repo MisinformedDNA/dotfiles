@@ -24,7 +24,7 @@ You can test the Codespaces setup script without actually using Codespaces:
 
 ```bash
 # On Linux/macOS/WSL with PowerShell installed
-pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/Setup-Codespaces.ps1
+pwsh -NoProfile -ExecutionPolicy Bypass -File ./Setup.ps1
 ```
 
 ## Opening in Codespaces

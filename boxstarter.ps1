@@ -30,8 +30,7 @@ git pull
 
 . (Join-Path $dotfilesPath scripts/Initialize-Windows.ps1)
 . (Join-Path $dotfilesPath scripts/Install-Apps.ps1)
-. (Join-Path $dotfilesPath scripts/Install-PowershellModules.ps1)
 
 Write-Host "Calling powershell setup"
-$pwshSetupPath = Join-Path $dotfilesPath "/scripts/Setup-PowerShell.ps1"
+$pwshSetupPath = Join-Path $dotfilesPath "Setup.ps1"
 pwsh -File $pwshSetupPath
