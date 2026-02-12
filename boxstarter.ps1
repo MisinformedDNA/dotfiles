@@ -1,20 +1,6 @@
 <#Install Boxstarter:
-
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-. { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
-Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/MisinformedDNA/dotfiles/main/boxstarter.ps1
-#http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/main/boxstarter.ps1
-
-#> 
-
-Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-choco feature enable -n=useRememberedArgumentsForUpgrades
-
-New-Item -Type Directory -Path C:\ -Name temp -ErrorAction SilentlyContinue
-choco config set cacheLocation c:\temp
-
-choco upgrade git --params="'/NoShellIntegration /NoGitLfs'"
-refreshenv
+http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/MisinformedDNA/dotfiles/main/boxstarter.ps1
+#>
 
 # # Clone dotfiles
 Write-Host "Clone dotfiles"
