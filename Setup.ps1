@@ -3,13 +3,15 @@
 
 Write-Host "Setting up PowerShell environment..." -ForegroundColor Green
 
+$isWindowsPlatform = $env:OS -eq "Windows_NT"
+
 # Install PowerShell modules
 . (Join-Path $PSScriptRoot scripts/Install-PowerShellModules.ps1)
 
 # Install Oh My Posh
 Write-Host "Installing Oh My Posh..." -ForegroundColor Cyan
 if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
-    if ($IsWindows) {
+    if ($isWindowsPlatform) {
         if (Get-Command winget -ErrorAction SilentlyContinue) {
             winget install --id JanDeDobbeleer.OhMyPosh -e --silent
             if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
@@ -46,7 +48,7 @@ if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
 
 # Ensure POSH_THEMES_PATH and download paradox theme locally (Linux/Codespaces only)
 # On Windows, oh-my-posh installation sets POSH_THEMES_PATH and includes all themes
-if (-not $IsWindows) {
+if (-not $isWindowsPlatform) {
     if (-not $env:POSH_THEMES_PATH) {
         $homePath = if ($env:HOME) { $env:HOME } else { $env:USERPROFILE }
         $themesDir = Join-Path $homePath ".poshthemes"

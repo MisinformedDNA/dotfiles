@@ -24,9 +24,6 @@
         },
         {
           "PackageIdentifier": "Microsoft.PowerToys"
-        },
-        {
-          "PackageIdentifier": "Spotify.Spotify"
         }
       ],
       "SourceDetails": {

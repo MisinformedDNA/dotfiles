@@ -1,16 +1,21 @@
-# Enable Hyper-V if supported (requires Windows Pro/Enterprise/Education)
-$hyperv = Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -NoRestart -ErrorAction SilentlyContinue
-if (-not $hyperv) {
-    Write-Warning "Hyper-V not available (requires Windows Pro/Enterprise/Education)"
-}
-
 # Install all apps from winget configuration file
 Write-Host "Installing applications from winget-packages.json..."
 $wingetPackagesPath = Join-Path (Split-Path $PSScriptRoot -Parent) "winget-packages.json"
-winget import -i $wingetPackagesPath --accept-package-agreements --accept-source-agreements --ignore-versions
+
+if (Get-Command winget -ErrorAction SilentlyContinue) {
+    winget import -i $wingetPackagesPath --accept-package-agreements --accept-source-agreements --ignore-versions
+}
+else {
+    Write-Warning "winget is not installed or not in PATH; skipping application import."
+}
 
 # Install CascadiaCode font
-oh-my-posh font install CascadiaCode
+if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
+    oh-my-posh font install CascadiaCode
+}
+else {
+    Write-Warning "oh-my-posh not found; skipping font installation."
+}
 
 # Setup Windows Terminal
 . (Join-Path $PSScriptRoot ../apps/WindowsTerminal/setup.ps1)

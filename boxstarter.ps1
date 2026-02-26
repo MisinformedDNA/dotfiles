@@ -42,4 +42,24 @@ if (Test-Path $dotfilesPath) {
 
 Write-Host "Calling powershell setup"
 $pwshSetupPath = Join-Path $dotfilesPath "Setup.ps1"
-pwsh -File $pwshSetupPath
+$pwshCommand = Get-Command pwsh -ErrorAction SilentlyContinue
+
+if ($pwshCommand) {
+    & $pwshCommand.Source -File $pwshSetupPath
+}
+else {
+    $pwshCandidatePaths = @(
+        (Join-Path $env:ProgramFiles "PowerShell\7\pwsh.exe"),
+        (Join-Path ${env:ProgramFiles(x86)} "PowerShell\7\pwsh.exe")
+    )
+
+    $pwshExePath = $pwshCandidatePaths | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+
+    if ($pwshExePath) {
+        & $pwshExePath -File $pwshSetupPath
+    }
+    else {
+        Write-Warning "PowerShell 7 (pwsh) is not installed or not yet available in PATH. Running setup with Windows PowerShell instead."
+        powershell.exe -ExecutionPolicy Bypass -File $pwshSetupPath
+    }
+}
