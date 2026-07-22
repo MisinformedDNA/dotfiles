@@ -8,16 +8,20 @@
     "keybindings": 
     [
         {
+            "id": "User.sendInput.8F63D3A9",
+            "keys": "shift+enter"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        },
+        {
             "id": null,
             "keys": "esc"
         },
         {
             "id": null,
             "keys": "win+sc(41)"
-        },
-        {
-            "id": "Terminal.DuplicatePaneAuto",
-            "keys": "alt+shift+d"
         },
         {
             "id": "Terminal.PasteFromClipboard",
