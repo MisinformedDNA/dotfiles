@@ -91,6 +91,72 @@ function gpn { git push --set-upstream origin HEAD }
 
 function gs { git status @args }
 
+function gwt {
+    [CmdletBinding()]
+    param(
+        # Git-style: -b new-branch
+        [Parameter(Position=0)]
+        [switch]$b,
+
+        # Branch name (tab-completes)
+        [Parameter(Mandatory=$true, Position=1)]
+        [ArgumentCompleter({
+            param($commandName, $parameterName, $wordToComplete)
+
+            git for-each-ref --format='%(refname:short)' refs/heads |
+                Where-Object { $_ -like "$wordToComplete*" }
+        })]
+        [string]$BranchName,
+
+        # Optional worktree name (tab-completes)
+        [Parameter(Position=2)]
+        [ArgumentCompleter({
+            param($commandName, $parameterName, $wordToComplete)
+
+            git worktree list --porcelain |
+                Select-String '^worktree ' |
+                ForEach-Object { Split-Path ($_.ToString().Substring(9)) -Leaf } |
+                Where-Object { $_ -like "$wordToComplete*" }
+        })]
+        [string]$WorktreeName
+    )
+
+    # Find the actual git root
+    $gitRoot = git rev-parse --show-toplevel 2>$null
+    if (-not $gitRoot) {
+        Write-Error "Not inside a Git repository."
+        return
+    }
+
+    $gitRoot = (Resolve-Path $gitRoot).Path
+    $repoName = Split-Path $gitRoot -Leaf
+    $parentDir = Split-Path $gitRoot -Parent
+
+    # Default worktree name if not provided
+    if (-not $WorktreeName) {
+        $WorktreeName = "$repoName-$BranchName"
+    }
+
+    $newWorktreePath = Join-Path $parentDir $WorktreeName
+
+    # Build git worktree add command safely
+    $gitArgs = @("worktree", "add", $newWorktreePath)
+
+    if ($b) {
+        # Git-correct: path first, then -b <branch>
+        $gitArgs += "-b"
+        $gitArgs += $BranchName
+    }
+    else {
+        # Existing branch
+        $gitArgs += $BranchName
+    }
+
+    Write-Host "Creating worktree at: $newWorktreePath"
+    git @gitArgs
+}
+
+
 function fixauthor { git commit --amend --reset-author -C HEAD }
 
 function gcl([string] $url, [string] $directory = '') {
